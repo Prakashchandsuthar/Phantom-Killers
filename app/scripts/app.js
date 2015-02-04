@@ -19,31 +19,6 @@ angular
     'ngTouch',
     'chart.js'
   ])
-/*  .config(function ($routeProvider) {
-    $routeProvider
-      .when('/', {
-        templateUrl: 'views/dashboard.html',
-        controller: 'DashboardCtrl'
-      })
-      .when('/orgnization', {
-        templateUrl: 'views/organization.html',
-        controller: 'OrganizationCtrl'
-      })
-        .when('/projects', {
-            templateUrl: 'views/projects.html',
-            controller: 'ProjectsCtrl'
-        })
-        .when('/employees', {
-            templateUrl: 'views/employees.html',
-            controller: 'EmployeesCtrl'
-        })
-      .otherwise({
-        redirectTo: '/'
-      });
-  });
-*/
-
-
 .config(function($stateProvider, $urlRouterProvider) {
     //
     // For any unmatched url, redirect to /state1
