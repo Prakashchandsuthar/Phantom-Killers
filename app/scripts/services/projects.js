@@ -45,14 +45,10 @@ angular.module('dashboardApp')
                 error: function (callback) {errorCallback = callback; return response;}
             };
             setTimeout(function(){
-                var len = projects.length;
-                for (var idx = 0; idx < len; idx++) {
-                    if (projects[idx].name === projId) {
-                        successCallback(projects[idx]);
-                        break;
-                    }
-                }
-                if (idx >= len) {
+                var idx = getProjectIndex (projects, projId);
+                if (idx !== -1) {
+                    successCallback(projects[idx]);
+                } else {
                     errorCallback({msg: 'No Project with: ' + projId + ' id'});
                 }
             }, 500);
@@ -65,5 +61,15 @@ angular.module('dashboardApp')
 
         this.setCurrentProject = function (projId) {
             this.currProjId = projId;
+        };
+
+        var getProjectIndex = function (projects, projId) {
+            var len = projects.length;
+            for (var idx = 0; idx < len; idx++) {
+                if (projects[idx].name === projId) {
+                    return idx;
+                }
+            }
+            return -1;
         };
   });
