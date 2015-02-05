@@ -63,7 +63,7 @@ angular.module('dashboardApp')
         var getProjectIndex = function (projects, projId) {
             var len = projects.length;
             for (var idx = 0; idx < len; idx++) {
-                if (projects[idx].name === projId) {
+                if ('' + projects[idx]._id === projId) {
                     return idx;
                 }
             }

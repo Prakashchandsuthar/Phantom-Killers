@@ -24,7 +24,7 @@
 <div class="col-xs-12 col-md-4" data-ng-repeat="project in projects | filter:searchText">
     <div class="panel-wrapper">
         <div class="panel-title">
-            <a ui-sref="projects.view({projId: project.name})">{{project.name}} :</a>
+            <a ui-sref="projects.view({projId: project._id})">{{project.name}} :</a>
             <span class="badge">{{project.openpositions}}</span> Open Positions
         </div>
         <div class="panel-stage">

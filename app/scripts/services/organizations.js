@@ -62,7 +62,7 @@ angular.module('dashboardApp')
         var getOrganizationIndex = function (organizations, orgId) {
             var len = organizations.length;
             for (var idx = 0; idx < len; idx++) {
-                if (organizations[idx].name === orgId) {
+                if ('' + organizations[idx]._id === orgId) {
                     return idx;
                 }
             }
