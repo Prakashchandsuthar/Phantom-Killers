@@ -13,9 +13,11 @@ angular.module('dashboardApp')
         organizationsService.getAllOrganizations()
             .success (function (data){
                 $scope.organizations = data;
-                $scope.$apply();})
+                // $scope.$apply();
+            })
             .error (function (error){
-                console.log (error.msg);});
+                console.log (error.msg);
+             });
 
         $scope.showOrganization = function (organization) {
             console.log ('AMOl', organization.name);

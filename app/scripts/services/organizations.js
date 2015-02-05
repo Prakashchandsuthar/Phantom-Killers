@@ -8,27 +8,29 @@
  * Service in the dashboardApp.
  */
 angular.module('dashboardApp')
-  .service('organizationsService', function () {
-        var organizations = [
-            {name: 'Synerzip', chart: 'area-chart.png', projects: ['Google','PDX', 'Halliburton'], owner: 'Vinayak'},
-            {name: 'Starks', chart: 'area-chart.png', projects: ['Loven', 'Halliburton'], owner: 'Mukund'},
-            {name: 'Lanisters', chart: 'area-chart.png', projects: ['LRS','Zimbra', 'Mercatus'], owner: 'Ashutosh'},
-            {name: 'Targareyen', chart: 'area-chart.png', projects: ['CMS','Studer'], owner: 'Preshit'},
-            {name: 'Baratheon', chart: 'area-chart.png', projects: ['PDX'], owner: 'Anil Nerurkar'},
-            {name: 'Tryrell', chart: 'area-chart.png', projects: ['CloudOn','Prezi'], owner: 'Amit Bakore'}
-        ];
+  .service('organizationsService', function ($http) {
+        var organizations = [ ];
+
         this.currOrgId;
     // AngularJS will instantiate a singleton by calling "new" on this function
         this.getAllOrganizations = function () {
-
             var successCallback, errorCallback;
             var response = {
                 success: function (callback) {successCallback = callback; return response;},
                 error: function (callback) {errorCallback = callback; return response;}
             };
-            setTimeout(function(){
-                successCallback(organizations);
-            }, 500);
+
+            $http.get('http://localhost:3000/api/organizations')
+                .success(function(items){
+                    organizations = items;
+                    successCallback(organizations);
+                })
+                .error(function(error){
+                    if (error) {
+                        errorCallback(error);
+                    }
+                });
+
             return response;
         };
 
@@ -66,5 +68,4 @@ angular.module('dashboardApp')
             }
             return -1;
         };
-
   });
