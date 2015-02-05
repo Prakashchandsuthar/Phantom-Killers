@@ -14,7 +14,13 @@ angular.module('dashboardApp')
         projectsService.getAllProjects()
             .success (function (data){
                 $scope.projects = data;
-                $scope.$apply();})
+                //$scope.$apply();
+             })
             .error (function (error){
                 console.log (error.msg);});
+
+    $scope.showProject = function (project) {
+      console.log ('test project', project.name);
+      //$state.transitionTo('organization.view', organization);
+    };
   });
