@@ -14,8 +14,8 @@ angular.module('dashboardApp')
         organizationsService.getOrganization($stateParams.orgId)
             .success (function (data){
                 $scope.organization = data;
-                $scope.$apply();
-                console.log ($scope.organization.name);})
+                //$scope.$apply();
+            })
             .error (function (error){
                 console.log (error.msg);});
 

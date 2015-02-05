@@ -40,14 +40,21 @@ angular.module('dashboardApp')
                 success: function (callback) {successCallback = callback; return response;},
                 error: function (callback) {errorCallback = callback; return response;}
             };
-            setTimeout(function(){
-                var idx = getOrganizationIndex (organizations, orgId);
-                if (idx !== -1) {
-                    successCallback(organizations[idx]);
-                } else {
-                    errorCallback({msg: 'No Organization with: ' + orgId + ' id'});
-                }
-            }, 500);
+
+            $http.get('http://localhost:3000/api/organizations/'+orgId)
+                .success(function(item){
+                    var idx = getOrganizationIndex (organizations, orgId);
+                    if (idx !== -1) {
+                        organizations[idx] = item;
+                    }
+                    successCallback(item);
+                })
+                .error(function(error){
+                    if (error) {
+                        errorCallback({msg: 'No Organization with: ' + orgId + ' id'});
+                    }
+                });
+
             return response;
         };
 
