@@ -13,7 +13,7 @@ angular.module('dashboardApp')
         this.currProjId;
         // AngularJS will instantiate a singleton by calling "new" on this function
         this.getAllProjects = function () {
-          console.log("getAllprojects");
+          //console.log("getAllprojects");
             var successCallback, errorCallback;
             var response = {
                 success: function (callback) {successCallback = callback; return response;},
@@ -23,6 +23,7 @@ angular.module('dashboardApp')
 
     $http.get('http://localhost:3000/api/projects')
       .success(function(items){
+        console.log(items);
         projects = items;
         successCallback(projects);
       })

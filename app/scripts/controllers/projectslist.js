@@ -20,7 +20,7 @@ angular.module('dashboardApp')
                 console.log (error.msg);});
 
     $scope.showProject = function (project) {
-      console.log ('test project', project.name);
+      //console.log ('test project', project.name);
       //$state.transitionTo('organization.view', organization);
     };
   });
