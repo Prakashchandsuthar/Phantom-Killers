@@ -1,7 +1,8 @@
 'use strict';
 
 /**
- * @ngdoc service
+ * @ngdoc service................................................................................................................
+ *
  * @name dashboardApp.dashboard
  * @description
  * # dashboard
