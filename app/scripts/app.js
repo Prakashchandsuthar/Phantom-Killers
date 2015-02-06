@@ -81,6 +81,21 @@ angular
             url: "/employees",
             templateUrl: "views/employees.html",
             controller: 'EmployeesCtrl'
-        });
+        }).state('employees.view', {
+           url: "/view/:empId",
+           templateUrl: "views/employees.view.html",
+           controller: 'EmployeesViewCtrl',
+           parent: 'employees'
+      }).state('employees.list', {
+           url: "/list",
+           templateUrl: "views/employees.list.html",
+           controller: 'EmployeesListCtrl',
+           parent: 'employees'
+      }).state('employees.edit', {
+            url: "/edit/:empId",
+            templateUrl: "views/employees.edit.html",
+            controller: 'EmployeesEditCtrl',
+            parent: 'employees'
+      });
 });
 

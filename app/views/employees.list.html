@@ -1,1 +1,49 @@
-<p>This is the employees.list view.</p>
+<div class="container">
+
+  <div class="row">
+    <div class="col-md-12">
+      <form>
+        <div class="input-group input-group-lg">
+          <input type="text" class="form-control" data-ng-model="searchText.name"/>
+          <div class="input-group-btn">
+            <button class="btn btn-default">
+              <span class="glyphicon glyphicon-filter"></span> Filter
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      &nbsp;
+    </div>
+  </div>
+  <div class="row">
+
+    <div class="col-xs-12 col-md-4" data-ng-repeat="employee in employees | filter:searchText">
+      <div class="panel-wrapper">
+        <div class="panel-title">
+          <a ui-sref="employee.view({empId: employee._id})" data-ng-click="showEmployee(employee)">{{employee.name}}</a>
+        </div>
+        <div class="panel-stage">
+          <div class="row">
+            <div class="col-xs-12">
+              <div class="panel-wrapper">
+                <div class="panel-title">
+                  Employee Details
+                </div>
+                <div class="panel-stage">
+                  <img src="images/profile-male.png" class="img-responsive">
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+
+</div>
+        </div>
+      </div>
+    </div>
+  </div>
