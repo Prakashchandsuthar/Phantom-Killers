@@ -42,14 +42,21 @@ angular.module('dashboardApp')
                 success: function (callback) {successCallback = callback; return response;},
                 error: function (callback) {errorCallback = callback; return response;}
             };
-            setTimeout(function(){
-                var idx = getProjectIndex (projects, projId);
-                if (idx !== -1) {
-                    successCallback(projects[idx]);
-                } else {
-                    errorCallback({msg: 'No Project with: ' + projId + ' id'});
-                }
-            }, 500);
+
+            $http.get('http://localhost:3000/api/projects/'+projId)
+                .success(function(item){
+                    var idx = getProjectIndex (projects, projId);
+                    if (idx !== -1) {
+                        projects[idx] = item;
+                    }
+                    successCallback(item);
+                })
+                .error(function(error){
+                    if (error) {
+                        errorCallback({msg: 'No Project with: ' + projId + ' id'});
+                    }
+                });
+
             return response;
         };
 

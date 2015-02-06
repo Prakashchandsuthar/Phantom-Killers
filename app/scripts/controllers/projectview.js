@@ -14,7 +14,7 @@ angular.module('dashboardApp')
         projectsService.getProject($stateParams.projId)
             .success (function (data){
                 $scope.project = data;
-                $scope.$apply();
+                //$scope.$apply();
                 console.log ($scope.project.name);})
             .error (function (error){
                 console.log (error.msg);});
