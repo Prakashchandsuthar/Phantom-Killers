@@ -61,4 +61,47 @@ angular.module('dashboardApp')
             this.currOrgId = orgId;
         };
 
+        this.addProjectToCurrentOrg = function (newProject, orgName) {
+          var orgIndex = getOrganizationIndex(organizations,orgName);
+          organizations[orgIndex].projects.push(newProject);
+        };
+
+        this.removeProject = function(project, orgName) {
+          var orgIndex = getOrganizationIndex(organizations,orgName);
+          var projects = organizations[orgIndex].projects
+          console.log('deleting project...' + projects.indexOf(project));
+          projects.splice(projects.indexOf(project), 1);
+        };
+
+      var getOrganizationIndex = function (organizations, orgId) {
+        var len = organizations.length;
+        for (var idx = 0; idx < len; idx++) {
+          if (organizations[idx].name === orgId) {
+            return idx;
+          }
+        }
+        return -1;
+      };
+
+    var getProjectIndex = function(projects, projectName) {
+      projects.forEach(function(project, index) {
+        console.log(project +  '==' +  projectName)
+        if(project == projectName) {
+          return index;
+        }
+      });
+    };
+
+    this.updateProject = function(projectIndex, newValue, orgName) {
+      var orgIndex = getOrganizationIndex(organizations, orgName);
+      //var projectIndex = getProjectIndex(organizations[orgIndex].projects, project);
+      //console.log('updating project...' + projectIndex);
+      organizations[orgIndex].projects[projectIndex] = newValue;
+    };
+
+    this.resetProject = function(projectIndex, projectName, orgName) {
+      var orgIndex = getOrganizationIndex(orgName);
+      organizations[orgIndex].projects[projectIndex] = projectName;
+    };
+
   });

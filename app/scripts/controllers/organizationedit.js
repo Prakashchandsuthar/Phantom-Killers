@@ -8,7 +8,7 @@
  * Controller of the dashboardApp
  */
 angular.module('dashboardApp')
-  .controller('OrganizationeditCtrl', function ($scope, $stateParams, organizationsService) {
+  .controller('OrganizationeditCtrl', function ($scope, $state, $stateParams, organizationsService) {
 
 
         organizationsService.getOrganization($stateParams.orgId)
@@ -19,6 +19,37 @@ angular.module('dashboardApp')
             .error (function (error){
             console.log (error.msg);});
 
-        //$scope.organization = organizationsService.getOrganization($stateParams.orgId);
-        //console.log ($scope.organization.name);
+    $scope.addProject = function (orgName) {
+        for(var i = 0; i<= orgName.projects.length-1; i++){
+          if($scope.addNewProject == orgName.projects[i]){
+            alert ("Duplicate Org Name");
+            $scope.addNewProject = undefined;
+            return false;
+          }
+        }
+        if ($scope.addNewProject != undefined && $scope.addNewProject.trim() != '') {
+          organizationsService.addProjectToCurrentOrg($scope.addNewProject.trim(), orgName.name);
+          $scope.addNewProject = undefined;
+        }
+    };
+
+    $scope.deleteProject = function(project, orgName) {
+
+      organizationsService.removeProject(project, orgName);
+    };
+
+    $scope.openDialog = function(project, orgName) {
+      $state.transitionTo("organization.edit.popup");
+    };
+
+    $scope.updateProject = function(projectIndex, newValue, orgName) {
+      organizationsService.updateProject(projectIndex, newValue, orgName);
+    }
+
+    $scope.resetProject = function(projectIndex, projectName, orgName) {
+      organizationsService.resetProject(projectIndex, projectName, orgName);
+
+      $scope.$apply();
+    }
+
   });

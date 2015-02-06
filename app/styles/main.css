@@ -53,8 +53,6 @@ body{
     background: red;
     color: white;
     font-weight: bold;
-
-
 }
 
 .panel-wrapper .grey{
@@ -66,3 +64,25 @@ body{
     background: white;
 
 }
+
+.addProject {
+  margin-left: 49px;
+}
+
+button {
+  color: #fff;
+  cursor: pointer;
+  background-color:#0b97c4;
+}
+
+.glyphicon-edit{
+  cursor: pointer;
+  color: cadetblue;
+
+}
+
+.glyphicon-remove{
+  cursor: pointer;
+  color: red;
+}
+
