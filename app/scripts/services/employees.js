@@ -39,6 +39,18 @@ angular.module('dashboardApp')
 
       return response;
 
-    }
+    };
+
+    this.addEmployee = function(newEmp) {
+        $http.post('http://localhost:3000/api/employees', newEmp)
+            .success(function (item) {
+                employees.push(item);
+            })
+            .error(function (error) {
+                if (error) {
+                    errorCallback(error);
+                }
+            });
+    };
   });
 
