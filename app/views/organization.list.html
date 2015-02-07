@@ -10,6 +10,9 @@
                     <button class="btn btn-default">
                         <span class="glyphicon glyphicon-filter"></span> Filter
                     </button>
+                    <button class="btn btn-default" data-ng-click="addOrg = true;">
+                        <span class="glyphicon glyphicon-plus"></span> Add Organization
+                    </button>
                 </div>
             </div>
         </form>
@@ -63,5 +66,58 @@
         </div>
     </div>
 </div>
+</div>
+
+
+    <div class="overlay" ng-show='addOrg'>
+        <form>
+            <div class="panel-wrapper">
+                <label class="control-label">Name: </label>
+                <input type="text" class="form-control" data-ng-model="newOrg.name"/>
+            </div>
+
+            <div class="panel-wrapper">
+                <label class="control-label">Owner: </label>
+                <span>{{addOwner.name}} </span>
+                <br>
+                <span class="glyphicon glyphicon-check"> :  </span>
+                <select ng-model="addOwner" ng-options="employee.name for employee in employees"></select>
+            </div>
+
+            <div class="panel-wrapper">
+                <label class="control-label">Employees: </label>
+                <span data-ng-repeat="newEmp in newOrg.employees">{{($index+1)}} {{newEmp}} </span>
+                <br>
+                <button class="btn" data-ng-click="newOrg.employees = newOrg.employees || []; newOrg.employees.push(addEmp.name);">
+                    <span class="glyphicon glyphicon-plus"></span>
+                </button>
+                <button class="btn" data-ng-click="newProjects = [];">
+                    <span class="glyphicon glyphicon-refresh"></span>
+                </button>
+                <select ng-model="addEmp" ng-options="employee.name for employee in employees"></select>
+            </div>
+
+            <div class="panel-wrapper">
+                <label class="control-label">Projects: </label>
+                <span data-ng-repeat="newProject in newOrg.projects">{{($index+1)}} {{newProject}} </span>
+                <br>
+                <button class="btn" data-ng-click="newOrg.projects = newOrg.projects || []; newOrg.projects.push(addProject.name);">
+                    <span class="glyphicon glyphicon-plus"></span>
+                </button>
+                <button class="btn" data-ng-click="newProjects = [];">
+                    <span class="glyphicon glyphicon-refresh"></span>
+                </button>
+                <select ng-model="addProject" ng-options="project.name for project in projects"></select>
+            </div>
+
+            <button class="btn btn-default" data-ng-click="addOrganization(newOrg)">
+                <span class="glyphicon glyphicon-plus"></span> Add
+            </button>
+
+            <button class="btn btn-default" data-ng-click="addOrg = false; newOrg = {};">
+                <span class="glyphicon glyphicon-refresh"></span> Cancel
+            </button>
+        </form>
+    </div>
 
 </div>

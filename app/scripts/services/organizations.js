@@ -58,6 +58,18 @@ angular.module('dashboardApp')
             return response;
         };
 
+        this.addOrganization = function(newOrganization) {
+            $http.post('http://localhost:3000/api/organizations', newOrganization)
+                .success(function (item) {
+                    organizations.push(item);
+                })
+                .error(function (error) {
+                    if (error) {
+                        errorCallback(error);
+                    }
+                });
+        };
+
         this.addProjectToCurrentOrg = function (newProjectName, orgId) {
           var currOrg;
           var idx = getOrganizationIndex (organizations, '' + orgId);

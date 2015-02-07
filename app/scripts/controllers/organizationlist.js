@@ -8,7 +8,7 @@
  * Controller of the dashboardApp
  */
 angular.module('dashboardApp')
-  .controller('OrganizationlistCtrl', function ($scope, $state, organizationsService) {
+  .controller('OrganizationlistCtrl', function ($scope, $state, organizationsService, projectsService, employeesService) {
 
         organizationsService.getAllOrganizations()
             .success (function (data){
@@ -19,8 +19,35 @@ angular.module('dashboardApp')
                 console.log (error.msg);
              });
 
-        $scope.showOrganization = function (organization) {
-            console.log ('AMOl', organization.name);
-            //$state.transitionTo('organization.view', organization);
+        employeesService.getAllEmployees()
+            .success (function (data){
+            $scope.employees = data;
+            $scope.addOwner = $scope.employees[0];
+            $scope.addEmp = $scope.employees[0];
+            //$scope.$apply();
+        })
+            .error (function (error){
+            console.log (error.msg);});
+
+        projectsService.getAllProjects()
+            .success (function (data){
+            $scope.projects = data;
+            $scope.addProject = $scope.projects[0];
+            //$scope.$apply();
+        })
+            .error (function (error){
+            console.log (error.msg);});
+
+        $scope.addOrganization = function (newOrganization) {
+            newOrganization = newOrganization || {};
+            if (!newOrganization.name) {
+                alert('Add Name');
+                return;
+            }
+            $scope.addOrg = false;
+            $scope.newOrg = {};
+            newOrganization.owner = $scope.addOwner.name || 'Vinayak';
+            newOrganization._id = $scope.organizations.length ? $scope.organizations[$scope.organizations.length-1]._id + 1: 1;
+            organizationsService.addOrganization(newOrganization);
         };
   });
