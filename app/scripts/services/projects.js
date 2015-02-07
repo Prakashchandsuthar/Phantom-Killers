@@ -60,6 +60,18 @@ angular.module('dashboardApp')
             return response;
         };
 
+        this.addProject = function(newProject) {
+            $http.post('http://localhost:3000/api/projects', newProject)
+                .success(function (item) {
+                    projects.push(item);
+                })
+                .error(function (error) {
+                    if (error) {
+                        errorCallback(error);
+                    }
+                });
+        };
+
         this.getCurrentProject = function () {
             return getProject(this.currProjId);
         };
