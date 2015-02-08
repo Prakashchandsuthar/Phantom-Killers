@@ -91,6 +91,36 @@ angular.module('dashboardApp')
                 });
         };
 
+        this.updateEmployee = function(newEmp) {
+            $http.put('http://localhost:3000/api/employees/'+newEmp._id, newEmp)
+                .success(function(item){
+                    var idx = getEmployeeIndex (employees, '' + newEmp._id);
+                    if (idx !== -1) {
+                        employees[idx] = item;
+                    }
+                })
+                .error(function(error){
+                    if (error) {
+                    }
+                });
+        };
+
+        this.getEmployeeByName = function (employees, name) {
+            if (!employees) {
+                return undefined;
+            }
+            var len = employees.length;
+            for (var idx = 0; idx < len; idx++) {
+                if (employees[idx].name === name) {
+                    return employees[idx];
+                }
+            }
+            if (len > 0) {
+                return employees[0];
+            }
+            return undefined;
+        };
+
         var getEmployeeIndex = function (employees, empId) {
             var len = employees.length;
             for (var idx = 0; idx < len; idx++) {

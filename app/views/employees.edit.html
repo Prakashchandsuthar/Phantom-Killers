@@ -1,1 +1,57 @@
-<p>This is the employees.edit view.</p>
+
+<div class="container">
+    <form>
+        <div class="panel-wrapper">
+            <label class="control-label">Name: </label>
+            <input type="text" class="form-control" data-ng-model="newEmp.name"/>
+        </div>
+
+        <div class="panel-wrapper">
+            <label class="control-label">Projects: </label>
+            <span data-ng-repeat="newProject in newEmp.projects">{{($index+1)}} {{newProject}} </span>
+            <br>
+            <button class="btn" data-ng-click="newEmp.projects = newEmp.projects || []; newEmp.projects.push(addProject.name);">
+                <span class="glyphicon glyphicon-plus"></span>
+            </button>
+            <button class="btn" data-ng-click="newEmp.projects = [];">
+                <span class="glyphicon glyphicon-refresh"></span>
+            </button>
+            <select ng-model="addProject" ng-options="project.name for project in projects"></select>
+        </div>
+
+        <div class="panel-wrapper">
+            <label class="control-label">Organization: </label>
+            <span>{{addOrg.name}} </span>
+            <br>
+            <span class="glyphicon glyphicon-check"> :  </span>
+            <select ng-model="addOrg" ng-options="organization.name for organization in organizations"></select>
+        </div>
+
+        <div class="panel-wrapper">
+            <label class="control-label">Billable: </label>
+            <input type="checkbox" data-ng-model="newEmp.billable"/>
+        </div>
+
+        <div class="panel-wrapper">
+            <label class="control-label">Skills: </label>
+            <span data-ng-repeat="newSkill in newEmp.skills">{{($index+1)}} {{newSkill}} </span>
+            <br>
+            <button class="btn"
+                    data-ng-click="newEmp.skills = newEmp.skills || [];newEmp.skills.push(addSkill);">
+                <span class="glyphicon glyphicon-plus"></span>
+            </button>
+            <button class="btn" data-ng-click="newEmp.skills = [];">
+                <span class="glyphicon glyphicon-refresh"></span>
+            </button>
+            <select ng-model="addSkill" ng-options="skill for skill in skills"></select>
+        </div>
+
+        <button class="btn btn-default" data-ng-click="updateEmployee(newEmp);">
+            <span class="glyphicon glyphicon-plus"></span> Save
+        </button>
+
+        <button class="btn btn-default" data-ng-click='cancelUpdate()'>
+            <span class="glyphicon glyphicon-refresh"></span> Cancel
+        </button>
+    </form>
+</div>

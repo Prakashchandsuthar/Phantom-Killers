@@ -99,7 +99,7 @@
                 <button class="btn" data-ng-click="newProj.employees = newProj.employees || []; newProj.employees.push(addEmp.name);">
                     <span class="glyphicon glyphicon-plus"></span>
                 </button>
-                <button class="btn" data-ng-click="newProjects = [];">
+                <button class="btn" data-ng-click="newProj.employees = [];">
                     <span class="glyphicon glyphicon-refresh"></span>
                 </button>
                 <select ng-model="addEmp" ng-options="employee.name for employee in employees"></select>

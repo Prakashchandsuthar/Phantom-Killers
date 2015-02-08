@@ -8,44 +8,61 @@
  * Controller of the dashboardApp
  */
 angular.module('dashboardApp')
-  .controller('OrganizationeditCtrl', function ($scope, $stateParams, organizationsService) {
+  .controller('OrganizationeditCtrl', function ($scope, $state, $stateParams, organizationsService, employeesService, projectsService) {
     $scope.organization = {};
 
         organizationsService.getOrganization($stateParams.orgId)
             .success (function (data){
-            $scope.organization = data;
-            //$scope.$apply();
-            console.log ($scope.organization.name);})
+                $scope.organization = data;
+                $scope.newOrg = JSON.parse(JSON.stringify($scope.organization));
+                if ($scope.newOrg.owner && $scope.newOrg.owner.length > 0) {
+                    $scope.addOwner = employeesService.getEmployeeByName($scope.employees, $scope.newOrg.owner[0]);
+                }
+                if ($scope.newOrg.projects && $scope.newOrg.projects.length > 0) {
+                    $scope.addProject = projectsService.getProjectByName($scope.projects, $scope.newOrg.projects[0]);
+                }
+            })
             .error (function (error){
             console.log (error.msg);});
 
-    $scope.addProject = function () {
-      for(var i = 0; i<= $scope.organization.projects.length-1; i++){
-        if($scope.newProjectName == $scope.organization.projects[i]){
-          alert ("Duplicate Org Name");
-          $scope.newProjectName = undefined;
-          return false;
-        }
-      }
-      if ($scope.newProjectName != undefined && $scope.newProjectName.trim() != '') {
-        organizationsService.addProjectToCurrentOrg($scope.newProjectName.trim(), $scope.organization._id);
-        $scope.$apply();
-        $scope.newProjectName = undefined;
-      }
-    };
+        employeesService.getAllEmployees()
+            .success (function (data){
+            $scope.employees = data;
+            if ($scope.newOrg && $scope.newOrg.owner && $scope.newOrg.owner.length > 0) {
+                $scope.addOwner = employeesService.getEmployeeByName($scope.employees, $scope.newOrg.owner[0]);
+            }
+        })
+            .error (function (error){
+            console.log (error.msg);});
 
-    $scope.deleteProject = function(project) {
+        projectsService.getAllProjects()
+            .success (function (data){
+            $scope.projects = data;
+            if ($scope.newOrg && $scope.newOrg.projects && $scope.newOrg.projects.length > 0) {
+                $scope.addProject = projectsService.getProjectByName($scope.projects, $scope.newOrg.projects[0]);
+            }
+        })
+            .error (function (error){
+            console.log (error.msg);});
 
-      organizationsService.removeProject(project, $stateParams.orgId);
-    };
+        $scope.updateOrganization = function(newOrg) {
+            newOrg = newOrg || {};
+            if (!newOrg.name) {
+                alert('Add Name');
+                return;
+            }
+            organizationsService.updateOrganization(newOrg);
+            $state.transitionTo('organization.list');
+        };
 
-    $scope.updateProject = function(projectIndex, newValue, orgId) {
-      organizationsService.updateProject(projectIndex, newValue, orgId);
-    }
+        $scope.cancelUpdate = function() {
+            $scope.newOrg = JSON.parse(JSON.stringify($scope.organization));
+            if ($scope.newOrg.owner && $scope.newOrg.owner.length > 0) {
+                $scope.addOwner = employeesService.getEmployeeByName($scope.employees, $scope.newOrg.owner[0]);
+            }
+            if ($scope.newOrg.projects && $scope.newOrg.projects.length > 0) {
+                $scope.addProject = projectsService.getProjectByName($scope.projects, $scope.newOrg.projects[0]);
+            }
+        };
 
-    $scope.resetProject = function(projectIndex, projectName, orgName) {
-      organizationsService.resetProject(projectIndex, projectName, orgName);
-
-      $scope.$apply();
-    }
   });

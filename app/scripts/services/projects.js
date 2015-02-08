@@ -10,7 +10,7 @@
 angular.module('dashboardApp')
   .service('projectsService', function ($http) {
         var projects = [];
-        this.currProjId;
+
         // AngularJS will instantiate a singleton by calling "new" on this function
         this.getAllProjects = function () {
           //console.log("getAllprojects");
@@ -21,20 +21,19 @@ angular.module('dashboardApp')
                 };
 
 
-    $http.get('http://localhost:3000/api/projects')
-      .success(function(items){
-        console.log(items);
-        projects = items;
-        successCallback(projects);
-      })
-      .error(function(error){
-        if (error) {
-          errorCallback(error);
-        }
-      });
+            $http.get('http://localhost:3000/api/projects')
+                .success(function(items){
+                    projects = items;
+                    successCallback(projects);
+                })
+                .error(function(error){
+                    if (error) {
+                        errorCallback(error);
+                    }
+                });
 
-    return response;
- };
+            return response;
+        };
 
         this.getProject = function (projId) {
             var successCallback, errorCallback;
@@ -86,12 +85,34 @@ angular.module('dashboardApp')
                 });
         };
 
-        this.getCurrentProject = function () {
-            return getProject(this.currProjId);
+        this.updateProject = function(newProj) {
+            $http.put('http://localhost:3000/api/projects/'+newProj._id, newProj)
+                .success(function(item){
+                    var idx = getProjectIndex (projects, '' + newProj._id);
+                    if (idx !== -1) {
+                        projectss[idx] = item;
+                    }
+                })
+                .error(function(error){
+                    if (error) {
+                    }
+                });
         };
 
-        this.setCurrentProject = function (projId) {
-            this.currProjId = projId;
+        this.getProjectByName = function (projects, name) {
+            if (!projects) {
+                return undefined;
+            }
+            var len = projects.length;
+            for (var idx = 0; idx < len; idx++) {
+                if (projects[idx].name === name) {
+                    return projects[idx];
+                }
+            }
+            if (len > 0) {
+                return projects[0];
+            }
+            return undefined;
         };
 
         var getProjectIndex = function (projects, projId) {

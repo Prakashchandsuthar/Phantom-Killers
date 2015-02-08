@@ -13,7 +13,6 @@ angular.module('dashboardApp')
         organizationsService.getAllOrganizations()
             .success (function (data){
                 $scope.organizations = data;
-                // $scope.$apply();
             })
             .error (function (error){
                 console.log (error.msg);
@@ -23,8 +22,6 @@ angular.module('dashboardApp')
             .success (function (data){
             $scope.employees = data;
             $scope.addOwner = $scope.employees[0];
-            $scope.addEmp = $scope.employees[0];
-            //$scope.$apply();
         })
             .error (function (error){
             console.log (error.msg);});
@@ -33,7 +30,6 @@ angular.module('dashboardApp')
             .success (function (data){
             $scope.projects = data;
             $scope.addProject = $scope.projects[0];
-            //$scope.$apply();
         })
             .error (function (error){
             console.log (error.msg);});
@@ -46,7 +42,6 @@ angular.module('dashboardApp')
             }
             $scope.addOrg = false;
             $scope.newOrg = {};
-            newOrganization.owner = $scope.addOwner.name || 'Vinayak';
             newOrganization._id = $scope.organizations.length ? $scope.organizations[$scope.organizations.length-1]._id + 1: 1;
             organizationsService.addOrganization(newOrganization);
         };

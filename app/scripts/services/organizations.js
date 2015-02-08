@@ -11,7 +11,6 @@ angular.module('dashboardApp')
   .service('organizationsService', function ($http) {
         var organizations = [ ];
 
-        this.currOrgId;
     // AngularJS will instantiate a singleton by calling "new" on this function
         this.getAllOrganizations = function () {
             var successCallback, errorCallback;
@@ -84,94 +83,34 @@ angular.module('dashboardApp')
                 });
         };
 
-        this.addProjectToCurrentOrg = function (newProjectName, orgId) {
-          var currOrg;
-          var idx = getOrganizationIndex (organizations, '' + orgId);
-          if (idx !== -1) {
-            currOrg = organizations[idx];
-          }
-          var newProjects = {projects: currOrg.projects};
-          newProjects.projects.push(newProjectName);
-          $http.put('http://localhost:3000/api/organizations/'+orgId, newProjects)
-            .success(function(item){
-              currOrg = item;
-            })
-            .error(function(error){
-              if (error) {
-              }
-            });
+        this.updateOrganization = function(newOrg) {
+            $http.put('http://localhost:3000/api/organizations/'+newOrg._id, newOrg)
+                .success(function(item){
+                    var idx = getOrganizationIndex (organizations, '' + newOrg._id);
+                    if (idx !== -1) {
+                        organizations[idx] = item;
+                    }
+                })
+                .error(function(error){
+                    if (error) {
+                    }
+                });
         };
 
-        this.removeProject = function(deletedProject, orgId) {
-
-          var currOrg;
-          var idx = getOrganizationIndex (organizations, '' + orgId);
-          if (idx !== -1) {
-            currOrg = organizations[idx];
-          }
-          var newProjects = {projects: currOrg.projects};
-          newProjects.projects.splice(newProjects.projects.indexOf(deletedProject), 1);
-          $http.put('http://localhost:3000/api/organizations/'+orgId, newProjects)
-            .success(function(item){
-              currOrg = item;
-            })
-            .error(function(error){
-              if (error) {
-              }
-            });
-        };
-
-    var getProjectIndex = function(projects, projectName) {
-      projects.forEach(function(project, index) {
-        if(project == projectName) {
-          return index;
-        }
-      });
-    };
-
-    this.updateProject = function(projectIndex, project, orgId) {
-      var currOrg;
-      var idx = getOrganizationIndex (organizations, '' + orgId);
-      if (idx !== -1) {
-        currOrg = organizations[idx];
-      }
-      var newProjects = {projects: currOrg.projects};
-      newProjects.projects[projectIndex] = project;
-      $http.put('http://localhost:3000/api/organizations/'+orgId, newProjects)
-        .success(function(item){
-          currOrg = item;
-        })
-        .error(function(error){
-          if (error) {
-          }
-        });
-    };
-
-    this.resetProject = function(projectIndex, projectName, orgId) {
-
-      var currOrg;
-      var idx = getOrganizationIndex (organizations, '' + orgId);
-      if (idx !== -1) {
-        currOrg = organizations[idx];
-      }
-      var newProjects = {projects: currOrg.projects};
-      newProjects.projects[projectIndex] = projectName;
-      $http.put('http://localhost:3000/api/organizations/'+orgId, newProjects)
-        .success(function(item){
-          currOrg = item;
-        })
-        .error(function(error){
-          if (error) {
-          }
-        });
-    };
-
-        this.getCurrentOrganization = function () {
-            return getOrganization(this.currOrgId);
-        };
-
-        this.setCurrentOrganization = function (orgId) {
-            this.currOrgId = orgId;
+        this.getOrganizationByName = function (organizations, name) {
+            if (!organizations) {
+                return undefined;
+            }
+            var len = organizations.length;
+            for (var idx = 0; idx < len; idx++) {
+                if (organizations[idx].name === name) {
+                    return organizations[idx];
+                }
+            }
+            if (len > 0) {
+                return organizations[0];
+            }
+            return undefined;
         };
 
         var getOrganizationIndex = function (organizations, orgId) {
