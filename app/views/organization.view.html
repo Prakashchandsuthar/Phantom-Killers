@@ -6,7 +6,7 @@
                     <div class="row">
                         <div class="col-xs-4">{{organization.name}}</div>
                         <div class="col-xs-offset-8 col-xs-2"><a ui-sref="organization.edit({orgId: organization._id})"><i class="glyphicon glyphicon-edit"></i> Edit</a></div>
-                        <div class="col-xs-2"><a><i class="glyphicon glyphicon-remove"></i> Delete</a></div>
+                        <div class="col-xs-2"><a data-ng-click="deleteOrganization(organization._id)" ui-sref="organization.list"><i class="glyphicon glyphicon-remove"></i> Delete</a></div>
                     </div>
                 </div>
                 <div class="panel-stage">

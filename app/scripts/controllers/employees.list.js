@@ -54,6 +54,7 @@ angular.module('dashboardApp')
             $scope.addEmp = false;
             $scope.newEmp = {};
             newEmp.billable = newEmp.billable || false;
+            newEmp.organization = $scope.addOrg.name;
             newEmp._id = $scope.employees.length ? $scope.employees[$scope.employees.length-1]._id + 1: 1;
             employeesService.addEmployee(newEmp);
 

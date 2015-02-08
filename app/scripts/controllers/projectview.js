@@ -19,6 +19,7 @@ angular.module('dashboardApp')
             .error (function (error){
                 console.log (error.msg);});
 
-        //$scope.project = projectsService.getProject($stateParams.projId);
-        //console.log ($scope.project.name);
+        $scope.deleteProject = function(projId) {
+            projectsService.deleteProject(projId);
+        }
   });

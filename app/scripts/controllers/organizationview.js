@@ -19,6 +19,7 @@ angular.module('dashboardApp')
             .error (function (error){
                 console.log (error.msg);});
 
-        //$scope.organization = organizationsService.getOrganization($stateParams.orgId);
-        //console.log ($scope.organization.name);
+        $scope.deleteOrganization = function(orgId) {
+            organizationsService.deleteOrganization(orgId);
+        }
   });

@@ -70,6 +70,20 @@ angular.module('dashboardApp')
                 });
         };
 
+        this.deleteOrganization = function(orgId) {
+            $http.delete('http://localhost:3000/api/organizations/'+orgId)
+                .success(function (item) {var idx = getOrganizationIndex (organizations, '' + orgId);
+                    if (idx !== -1) {
+                        organizations.splice(idx, 1);
+                    }
+                })
+                .error(function (error) {
+                    if (error) {
+                        errorCallback(error);
+                    }
+                });
+        };
+
         this.addProjectToCurrentOrg = function (newProjectName, orgId) {
           var currOrg;
           var idx = getOrganizationIndex (organizations, '' + orgId);

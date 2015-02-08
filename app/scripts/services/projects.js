@@ -72,6 +72,20 @@ angular.module('dashboardApp')
                 });
         };
 
+        this.deleteProject = function(projId) {
+            $http.delete('http://localhost:3000/api/projects/'+projId)
+                .success(function (item) {var idx = getProjectIndex (projects, '' + projId);
+                    if (idx !== -1) {
+                        projects.splice(idx, 1);
+                    }
+                })
+                .error(function (error) {
+                    if (error) {
+                        errorCallback(error);
+                    }
+                });
+        };
+
         this.getCurrentProject = function () {
             return getProject(this.currProjId);
         };

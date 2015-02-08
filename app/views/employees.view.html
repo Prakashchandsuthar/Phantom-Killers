@@ -1,1 +1,73 @@
-<p>This is the employees.view view.</p>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="panel-wrapper">
+                <div class="panel-title">
+                    <div class="row">
+                        <div class="col-xs-4">{{employee.name}}</div>
+                        <div class="col-xs-offset-8 col-xs-2"><a ui-sref="employees.edit({empId: employee._id})"><i class="glyphicon glyphicon-edit"></i> Edit</a></div>
+                        <div class="col-xs-2"><a data-ng-click="deleteEmployee(employee._id)"  ui-sref="employees.list"><i class="glyphicon glyphicon-remove"></i> Delete</a></div>
+                    </div>
+                </div>
+
+                <div class="panel-stage">
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="panel-wrapper">
+                                <div class="panel-title">
+                                    Projects
+                                </div>
+                                <div class="panel-stage">
+                                    <li data-ng-repeat="project in employee.projects">{{project}} </li>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="panel-wrapper">
+                                <div class="panel-title">
+                                    Organization
+                                </div>
+                                <div class="panel-stage">
+                                    {{employee.organization}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="panel-wrapper">
+                                <div class="panel-title">
+                                    Billable
+                                </div>
+                                <div class="panel-stage">
+                                    <span ng-class= '{yellow: employee.billable}' ng-show = 'employee.billable'> Yes </span>
+                                    <span ng-class= '{red: !employee.billable}' ng-show = '!employee.billable'> No </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="panel-wrapper">
+                                <div class="panel-title">
+                                    Skills
+                                </div>
+                                <div class="panel-stage">
+                                    <li data-ng-repeat="skill in employee.skills">{{skill}} </li>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
