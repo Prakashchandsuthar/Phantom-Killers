@@ -96,7 +96,7 @@
                 <label class="control-label">Employees: </label>
                 <span data-ng-repeat="newEmp in newProj.employees">{{($index+1)}} {{newEmp}} </span>
                 <br>
-                <button class="btn" data-ng-click="newProj.employees = newProj.employees || []; newProj.employees.push(addEmp.name);">
+                <button class="btn" data-ng-click="newProj.employees = newProj.employees || []; addUniqueItem(newProj.employees, addEmp.name)">
                     <span class="glyphicon glyphicon-plus"></span>
                 </button>
                 <button class="btn" data-ng-click="newProj.employees = [];">

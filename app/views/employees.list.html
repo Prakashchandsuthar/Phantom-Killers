@@ -61,7 +61,7 @@
               <label class="control-label">Projects: </label>
               <span data-ng-repeat="newProject in newEmp.projects">{{($index+1)}} {{newProject}} </span>
               <br>
-              <button class="btn" data-ng-click="newEmp.projects = newEmp.projects || []; newEmp.projects.push(addProject.name);">
+              <button class="btn" data-ng-click="newEmp.projects = newEmp.projects || [];addUniqueItem(newEmp.projects, addProject.name)">
                   <span class="glyphicon glyphicon-plus"></span>
               </button>
               <button class="btn" data-ng-click="newEmp.projects = [];">
@@ -88,7 +88,7 @@
               <span data-ng-repeat="newSkill in newEmp.skills">{{($index+1)}} {{newSkill}} </span>
               <br>
               <button class="btn"
-                      data-ng-click="newEmp.skills = newEmp.skills || [];newEmp.skills.push(addSkill);">
+                      data-ng-click="newEmp.skills = newEmp.skills || [];addUniqueItem(newEmp.skills, addSkill)">
                   <span class="glyphicon glyphicon-plus"></span>
               </button>
               <button class="btn" data-ng-click="newEmp.skills = [];">

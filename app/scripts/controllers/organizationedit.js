@@ -11,6 +11,8 @@ angular.module('dashboardApp')
   .controller('OrganizationeditCtrl', function ($scope, $state, $stateParams, organizationsService, employeesService, projectsService) {
     $scope.organization = {};
 
+        $scope.addUniqueItem = addUniqueItem;
+
         organizationsService.getOrganization($stateParams.orgId)
             .success (function (data){
                 $scope.organization = data;

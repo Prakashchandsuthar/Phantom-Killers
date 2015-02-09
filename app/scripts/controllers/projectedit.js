@@ -10,6 +10,8 @@
 angular.module('dashboardApp')
   .controller('ProjecteditCtrl', function ($scope, $state, $stateParams, projectsService, organizationsService, employeesService) {
 
+        $scope.addUniqueItem = addUniqueItem;
+
         projectsService.getProject($stateParams.projId)
             .success (function (data){
                 $scope.project = data;

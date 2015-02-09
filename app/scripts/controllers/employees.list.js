@@ -9,7 +9,10 @@
  */
 angular.module('dashboardApp')
   .controller('EmployeesListCtrl', function ($scope,employeesService, projectsService, organizationsService) {
-    employeesService.getAllEmployees()
+
+        $scope.addUniqueItem = addUniqueItem;
+
+        employeesService.getAllEmployees()
       .success (function (data){
       $scope.employees = data;
       //$scope.$apply();

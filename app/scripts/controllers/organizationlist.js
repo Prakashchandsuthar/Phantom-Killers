@@ -10,6 +10,8 @@
 angular.module('dashboardApp')
   .controller('OrganizationlistCtrl', function ($scope, $state, organizationsService, projectsService, employeesService) {
 
+        $scope.addUniqueItem = addUniqueItem;
+
         organizationsService.getAllOrganizations()
             .success (function (data){
                 $scope.organizations = data;

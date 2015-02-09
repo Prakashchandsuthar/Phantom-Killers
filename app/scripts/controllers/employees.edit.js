@@ -9,6 +9,9 @@
  */
 angular.module('dashboardApp')
   .controller('EmployeesEditCtrl', function ($scope,$state, $stateParams, employeesService, projectsService, organizationsService) {
+
+        $scope.addUniqueItem = addUniqueItem;
+
         employeesService.getEmployee($stateParams.empId)
             .success (function (data){
             $scope.employee = data;

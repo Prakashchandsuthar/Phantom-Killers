@@ -10,7 +10,7 @@
             <label class="control-label">Owners: </label>
             <span data-ng-repeat="newEmp in newOrg.owner">{{($index+1)}} {{newEmp}} </span>
             <br>
-            <button class="btn" data-ng-click="newOrg.owner = newOrg.owner || []; newOrg.owner.push(addOwner.name);">
+            <button class="btn" data-ng-click="newOrg.owner = newOrg.owner || [];addUniqueItem(newOrg.owner, addOwner.name)">
                 <span class="glyphicon glyphicon-plus"></span>
             </button>
             <button class="btn" data-ng-click="newOrg.owner = [];">
@@ -23,7 +23,7 @@
             <label class="control-label">Projects: </label>
             <span data-ng-repeat="newProject in newOrg.projects">{{($index+1)}} {{newProject}} </span>
             <br>
-            <button class="btn" data-ng-click="newOrg.projects = newOrg.projects || []; newOrg.projects.push(addProject.name);">
+            <button class="btn" data-ng-click="newOrg.projects = newOrg.projects || []; addUniqueItem(newOrg.projects, addProject.name)">
                 <span class="glyphicon glyphicon-plus"></span>
             </button>
             <button class="btn" data-ng-click="newOrg.projects = [];">

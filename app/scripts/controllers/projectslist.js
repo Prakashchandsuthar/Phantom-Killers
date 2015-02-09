@@ -11,6 +11,7 @@ angular.module('dashboardApp')
   .controller('ProjectslistCtrl', function ($scope, $state, projectsService, employeesService, organizationsService) {
         //$scope.projects = projectsService.getAllProjects();
 
+        $scope.addUniqueItem = addUniqueItem;
         projectsService.getAllProjects()
             .success (function (data){
                 $scope.projects = data;
