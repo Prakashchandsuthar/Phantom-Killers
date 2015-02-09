@@ -52,7 +52,7 @@ angular.module('dashboardApp')
                 return;
             }
             organizationsService.updateOrganization(newOrg);
-            $state.transitionTo('organization.list');
+            $state.transitionTo('organization.view', {orgId: newOrg._id});
         };
 
         $scope.cancelUpdate = function() {

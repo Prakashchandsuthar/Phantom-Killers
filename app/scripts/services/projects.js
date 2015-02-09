@@ -90,7 +90,7 @@ angular.module('dashboardApp')
                 .success(function(item){
                     var idx = getProjectIndex (projects, '' + newProj._id);
                     if (idx !== -1) {
-                        projectss[idx] = item;
+                        projects[idx] = item;
                     }
                 })
                 .error(function(error){

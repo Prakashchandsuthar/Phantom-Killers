@@ -52,7 +52,7 @@ angular.module('dashboardApp')
             newEmp.billable = newEmp.billable || false;
             newEmp.organization = $scope.addOrg.name;
             employeesService.updateEmployee(newEmp);
-            $state.transitionTo('employees.list');
+            $state.transitionTo('employees.view', {empId: newEmp._id});
 
         };
 

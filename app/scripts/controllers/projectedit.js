@@ -52,7 +52,7 @@ angular.module('dashboardApp')
             newProj.owner = $scope.addOwner.name;
             newProj.organization = $scope.addOrg.name;
             projectsService.updateProject(newProj);
-            $state.transitionTo('projects.list');
+            $state.transitionTo('projects.view', {projId: newProj._id});
         };
 
         $scope.cancelUpdate = function() {
