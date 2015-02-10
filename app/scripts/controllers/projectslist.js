@@ -49,7 +49,13 @@ angular.module('dashboardApp')
         $scope.newProj = {};
         newProject.owner = $scope.addOwner.name || 'Vinayak';
         newProject.organization = $scope.addOrg.name;
-        newProject._id = $scope.projects.length ? $scope.projects[$scope.projects.length-1]._id + 1: 1;
+        var newId = 1;
+        if ($scope.projects.length) {
+            $scope.projects.sort(function(a,b){return a._id - b._id;});
+            newId = $scope.projects[$scope.projects.length-1]._id + 1;
+        }
+
+        newProject._id = newId;
         projectsService.addProject(newProject);
     };
   });

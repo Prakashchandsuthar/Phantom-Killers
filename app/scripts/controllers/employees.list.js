@@ -58,7 +58,12 @@ angular.module('dashboardApp')
             $scope.newEmp = {};
             newEmp.billable = newEmp.billable || false;
             newEmp.organization = $scope.addOrg.name;
-            newEmp._id = $scope.employees.length ? $scope.employees[$scope.employees.length-1]._id + 1: 1;
+            var newId = 1;
+            if ($scope.employees.length) {
+                $scope.employees.sort(function(a,b){return a._id - b._id;});
+                newId = $scope.employees[$scope.employees.length-1]._id + 1;
+            }
+            newEmp._id = newId;
             employeesService.addEmployee(newEmp);
 
         };

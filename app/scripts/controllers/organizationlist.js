@@ -44,7 +44,12 @@ angular.module('dashboardApp')
             }
             $scope.addOrg = false;
             $scope.newOrg = {};
-            newOrganization._id = $scope.organizations.length ? $scope.organizations[$scope.organizations.length-1]._id + 1: 1;
+            var newId = 1;
+            if ($scope.organizations.length) {
+                $scope.organizations.sort(function(a,b){return a._id - b._id;});
+                newId = $scope.organizations[$scope.organizations.length-1]._id + 1;
+            }
+            newOrganization._id = newId;
             organizationsService.addOrganization(newOrganization);
         };
   });
