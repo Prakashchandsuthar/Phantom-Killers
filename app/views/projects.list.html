@@ -94,12 +94,12 @@
 
             <div class="panel-wrapper">
                 <label class="control-label">Employees: </label>
-                <span data-ng-repeat="newEmp in newProj.employees">{{($index+1)}} {{newEmp}} </span>
+                <div data-ng-repeat="newEmp in newProj.employees">{{($index+1)}} {{newEmp}} [<a href ng-click="newProj.employees.splice($index, 1)">X</a>]</div>
                 <br>
                 <button class="btn" data-ng-click="newProj.employees = newProj.employees || []; addUniqueItem(newProj.employees, addEmp.name)">
                     <span class="glyphicon glyphicon-plus"></span>
                 </button>
-                <button class="btn" data-ng-click="newProj.employees = [];">
+                <button class="btn" title="Clear all selected Employees" data-ng-click="newProj.employees = [];">
                     <span class="glyphicon glyphicon-refresh"></span>
                 </button>
                 <select ng-model="addEmp" ng-options="employee.name for employee in employees"></select>
