@@ -14,8 +14,14 @@ angular.module('dashboardApp')
         projectsService.getProject($stateParams.projId)
             .success (function (data){
                 $scope.project = data;
-                //$scope.$apply();
-                console.log ($scope.project.name);})
+                $scope.series = ['Total','Billable', 'Bench'];
+                $scope.labels = data.labels;
+                $scope.Stats = [
+                    data.total,
+                    data.billable,
+                    data.bench
+                ];
+            })
             .error (function (error){
                 console.log (error.msg);});
 

@@ -47,8 +47,12 @@ angular.module('dashboardApp')
         }
         $scope.addProj = false;
         $scope.newProj = {};
-        newProject.owner = $scope.addOwner.name || 'Vinayak';
-        newProject.organization = $scope.addOrg.name;
+        if ($scope.addOwner) {
+            newProject.owner = $scope.addOwner.name;
+        }
+        if ($scope.addOrg) {
+            newProject.organization = $scope.addOrg.name;
+        }
         var newId = 1;
         if ($scope.projects.length) {
             $scope.projects.sort(function(a,b){return a._id - b._id;});

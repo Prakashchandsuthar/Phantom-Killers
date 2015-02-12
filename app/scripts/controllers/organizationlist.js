@@ -14,7 +14,7 @@ angular.module('dashboardApp')
 
         organizationsService.getAllOrganizations()
             .success (function (data){
-                $scope.organizations = data;
+                $scope.organizations = data || [];
             })
             .error (function (error){
                 console.log (error.msg);

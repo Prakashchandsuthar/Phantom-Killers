@@ -19,7 +19,7 @@
             <select ng-model="addOwner" ng-options="employee.name for employee in employees"></select>
         </div>
 
-        <div class="panel-wrapper">
+        <!--div class="panel-wrapper">
             <label class="control-label">Projects: </label>
             <span data-ng-repeat="newProject in newOrg.projects">{{($index+1)}} {{newProject}} </span>
             <br>
@@ -30,7 +30,7 @@
                 <span class="glyphicon glyphicon-refresh"></span>
             </button>
             <select ng-model="addProject" ng-options="project.name for project in projects"></select>
-        </div>
+        </div-->
 
         <button class="btn btn-default" data-ng-click="updateOrganization(newOrg)">
             <span class="glyphicon glyphicon-plus"></span> Save

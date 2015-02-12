@@ -14,6 +14,13 @@ angular.module('dashboardApp')
         organizationsService.getOrganization($stateParams.orgId)
             .success (function (data){
                 $scope.organization = data;
+                $scope.series = ['Total','Billable', 'Bench'];
+                $scope.labels = data.labels;
+                $scope.Stats = [
+                    data.total,
+                    data.billable,
+                    data.bench
+                ];
                 //$scope.$apply();
             })
             .error (function (error){

@@ -57,7 +57,9 @@ angular.module('dashboardApp')
             $scope.addEmp = false;
             $scope.newEmp = {};
             newEmp.billable = newEmp.billable || false;
-            newEmp.organization = $scope.addOrg.name;
+            if ($scope.addOrg) {
+                newEmp.organization = $scope.addOrg.name;
+            }
             var newId = 1;
             if ($scope.employees.length) {
                 $scope.employees.sort(function(a,b){return a._id - b._id;});
