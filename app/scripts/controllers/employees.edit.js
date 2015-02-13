@@ -35,7 +35,9 @@ angular.module('dashboardApp')
         organizationsService.getAllOrganizations()
             .success (function (data){
             $scope.organizations = data;
-            $scope.addOrg = organizationsService.getOrganizationByName($scope.organizations, $scope.newEmp.organization);
+            if($scope.newEmp) {
+                $scope.addOrg = organizationsService.getOrganizationByName($scope.organizations, $scope.newEmp.organization);
+            }
             //$scope.$apply();
         })
             .error (function (error){

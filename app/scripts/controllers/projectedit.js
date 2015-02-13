@@ -28,9 +28,12 @@ angular.module('dashboardApp')
         employeesService.getAllEmployees()
             .success (function (data){
             $scope.employees = data;
-            $scope.addOwner = employeesService.getEmployeeByName($scope.employees, $scope.newProj.owner);
-            if ($scope.newProj.employees && $scope.newProj.employees.length > 0) {
-                $scope.addEmp = employeesService.getEmployeeByName($scope.employees, $scope.newProj.employees[0]);
+            if($scope.newProj){
+                $scope.addOwner = employeesService.getEmployeeByName($scope.employees, $scope.newProj.owner);
+
+                if ($scope.newProj.employees && $scope.newProj.employees.length > 0) {
+                    $scope.addEmp = employeesService.getEmployeeByName($scope.employees, $scope.newProj.employees[0]);
+                }
             }
         })
             .error (function (error){
@@ -39,7 +42,9 @@ angular.module('dashboardApp')
         organizationsService.getAllOrganizations()
             .success (function (data){
             $scope.organizations = data;
-            $scope.addOrg = organizationsService.getOrganizationByName($scope.organizations, $scope.newProj.organization);
+            if ($scope.newProj) {
+                $scope.addOrg = organizationsService.getOrganizationByName($scope.organizations, $scope.newProj.organization);
+            }
         })
             .error (function (error){
             console.log (error.msg);});
