@@ -38,7 +38,7 @@
                             Total
                         </div>
                         <div class="panel-stage">
-                            <div class="red-days">{{organization.total}}</div>
+                            <div class="red-days">{{organization.total || 0}}</div>
                         </div>
 
                     </div>
@@ -49,7 +49,7 @@
                             Billable
                         </div>
                         <div class="panel-stage">
-                            <div class="red-days">{{organization.billable}}</div>
+                            <div class="red-days">{{organization.billable || 0}}</div>
                         </div>
 
                     </div>
