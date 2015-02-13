@@ -32,13 +32,24 @@
         </div>
         <div class="panel-stage">
             <div class="row">
-                <div class="col-xs-12">
+                <div class="col-xs-8 col-md-6">
                     <div class="panel-wrapper">
-                        <div class="panel-title">
-                            Billable Vs Bench
+                        <div class="panel-title" ng-class='{red: project.reddays > 0}'>
+                            Total
                         </div>
                         <div class="panel-stage">
-                            <img src="images/{{organization.chart}}" class="img-responsive">
+                            <div class="red-days">{{organization.total}}</div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-xs-8 col-md-6">
+                    <div class="panel-wrapper">
+                        <div class="panel-title">
+                            Billable
+                        </div>
+                        <div class="panel-stage">
+                            <div class="red-days">{{organization.billable}}</div>
                         </div>
 
                     </div>
