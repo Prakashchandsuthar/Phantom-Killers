@@ -89,12 +89,12 @@
 
             <div class="panel-wrapper">
                 <label class="control-label">Owners: </label>
-                <span data-ng-repeat="newEmp in newOrg.owner">{{($index+1)}} {{newEmp}} </span>
+                <div data-ng-repeat="newEmp in newOrg.owner">{{($index+1)}} {{newEmp}} [<a href ng-click="newOrg.owner.splice($index, 1)">X</a>]</div>
                 <br>
                 <button class="btn" data-ng-click="newOrg.owner = newOrg.owner || [];addUniqueItem(newOrg.owner, addOwner.name)">
                     <span class="glyphicon glyphicon-plus"></span>
                 </button>
-                <button class="btn" data-ng-click="newOrg.owner = [];">
+                <button class="btn" title="Clear all selected Owner" data-ng-click="newOrg.owner = [];">
                     <span class="glyphicon glyphicon-refresh"></span>
                 </button>
                 <select ng-model="addOwner" ng-options="employee.name for employee in employees"></select>
