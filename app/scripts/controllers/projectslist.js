@@ -59,7 +59,7 @@ angular.module('dashboardApp')
             newId = $scope.projects[$scope.projects.length-1]._id + 1;
         }
 
-        newProject._id = newId;
+        newProject._id = getUniqueTime();
         projectsService.addProject(newProject);
     };
   });

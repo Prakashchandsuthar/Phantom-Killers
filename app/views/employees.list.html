@@ -34,9 +34,6 @@
           <div class="row">
             <div class="col-xs-12">
               <div class="panel-wrapper">
-                <div class="panel-title">
-                  Employee Details
-                </div>
                 <div class="panel-stage">
                   <img src="images/profile-male.png" class="img-responsive">
                 </div>
@@ -45,6 +42,21 @@
             </div>
 
           </div>
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="panel-wrapper">
+                        <div class="panel-title">
+                            {{employee.organization}}
+                        </div>
+                        <div class="panel-stage">
+                            <li data-ng-repeat="skill in employee.skills">{{skill}}</li>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
 
 </div>
         </div>

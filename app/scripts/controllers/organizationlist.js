@@ -49,7 +49,7 @@ angular.module('dashboardApp')
                 $scope.organizations.sort(function(a,b){return a._id - b._id;});
                 newId = $scope.organizations[$scope.organizations.length-1]._id + 1;
             }
-            newOrganization._id = newId;
+            newOrganization._id = getUniqueTime();
             organizationsService.addOrganization(newOrganization);
         };
   });

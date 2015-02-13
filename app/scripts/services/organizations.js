@@ -42,11 +42,30 @@ angular.module('dashboardApp')
 
             $http.get('http://localhost:3000/api/organizations/'+orgId)
                 .success(function(item){
-                    var idx = getOrganizationIndex (organizations, orgId);
-                    if (idx !== -1) {
-                        organizations[idx] = item;
-                    }
-                    successCallback(item);
+                    $http.get('http://localhost:3000/api/organizationhistory/'+orgId)
+                        .success(function(history){
+                            item.billable = history.billable;
+                            item.bench = history.bench;
+                            item.total = history.total;
+                            item.labels = history.labels;
+                            var idx = getOrganizationIndex (organizations, orgId);
+                            if (idx !== -1) {
+                                organizations[idx] = item;
+                            }
+                            successCallback(item);
+                        })
+                        .error(function(error){
+                            if (error) {
+                                console.log('No History');
+
+                                var idx = getOrganizationIndex (organizations, orgId);
+                                if (idx !== -1) {
+                                    organizations[idx] = item;
+                                }
+                                successCallback(item);
+                            }
+                        });
+
                 })
                 .error(function(error){
                     if (error) {

@@ -65,7 +65,7 @@ angular.module('dashboardApp')
                 $scope.employees.sort(function(a,b){return a._id - b._id;});
                 newId = $scope.employees[$scope.employees.length-1]._id + 1;
             }
-            newEmp._id = newId;
+            newEmp._id = getUniqueTime();
             employeesService.addEmployee(newEmp);
 
         };

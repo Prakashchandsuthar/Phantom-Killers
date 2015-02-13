@@ -44,11 +44,30 @@ angular.module('dashboardApp')
 
             $http.get('http://localhost:3000/api/projects/'+projId)
                 .success(function(item){
-                    var idx = getProjectIndex (projects, projId);
-                    if (idx !== -1) {
-                        projects[idx] = item;
-                    }
-                    successCallback(item);
+                    $http.get('http://localhost:3000/api/projecthistory/'+projId)
+                        .success(function(history){
+                            item.billable = history.billable;
+                            item.bench = history.bench;
+                            item.total = history.total;
+                            item.labels = history.labels;
+                            var idx = getProjectIndex (projects, projId);
+                            if (idx !== -1) {
+                                projects[idx] = item;
+                            }
+                            successCallback(item);
+                        })
+                        .error(function(error){
+                            if (error) {
+                                console.log('No History');
+
+                                var idx = getProjectIndex (projects, projId);
+                                if (idx !== -1) {
+                                    projects[idx] = item;
+                                }
+                                successCallback(item);
+                            }
+                        });
+
                 })
                 .error(function(error){
                     if (error) {
