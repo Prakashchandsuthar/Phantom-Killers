@@ -51,8 +51,12 @@ angular.module('dashboardApp')
                 return;
             }
             $scope.newProj = {};
-            newProj.owner = $scope.addOwner.name;
-            newProj.organization = $scope.addOrg.name;
+            if ($scope.addOwner) {
+                newProj.owner = $scope.addOwner.name;
+            }
+            if ($scope.addOrg) {
+                newProj.organization = $scope.addOrg.name;
+            }
             projectsService.updateProject(newProj);
             $state.transitionTo('projects.view', {projId: newProj._id});
         };
