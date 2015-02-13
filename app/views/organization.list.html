@@ -89,7 +89,7 @@
 
             <div class="panel-wrapper">
                 <label class="control-label">Owners: </label>
-                <div data-ng-repeat="newEmp in newOrg.owner">{{($index+1)}} {{newEmp}} [<a href ng-click="newOrg.owner.splice($index, 1)">X</a>]</div>
+                <span class="tag" data-ng-repeat="newEmp in newOrg.owner">{{($index+1)}}. {{newEmp}} [<a href ng-click="newOrg.owner.splice($index, 1)">X</a>]</span>
                 <br>
                 <button class="btn" data-ng-click="newOrg.owner = newOrg.owner || [];addUniqueItem(newOrg.owner, addOwner.name)">
                     <span class="glyphicon glyphicon-plus"></span>

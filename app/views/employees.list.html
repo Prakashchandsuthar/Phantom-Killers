@@ -71,7 +71,7 @@
 
           <div class="panel-wrapper">
               <label class="control-label">Projects: </label>
-              <div style='display:"inline";' data-ng-repeat="newProject in newEmp.projects">{{($index+1)}}. {{newProject}} [<a href ng-click="newEmp.projects.splice($index, 1)">X</a>]</div>
+              <span class="tag" data-ng-repeat="newProject in newEmp.projects">{{($index+1)}}. {{newProject}} [<a href ng-click="newEmp.projects.splice($index, 1)">X</a>]</span>
               <br>
               <button class="btn" data-ng-click="newEmp.projects = newEmp.projects || [];addUniqueItem(newEmp.projects, addProject.name)">
                   <span class="glyphicon glyphicon-plus"></span>
@@ -97,7 +97,7 @@
 
           <div class="panel-wrapper">
               <label class="control-label">Skills: </label>
-              <div data-ng-repeat="newSkill in newEmp.skills">{{($index+1)}} {{newSkill}} [<a href ng-click="newEmp.skills.splice($index, 1)">X</a>]</div>
+              <span class="tag" data-ng-repeat="newSkill in newEmp.skills">{{($index+1)}}. {{newSkill}} [<a href ng-click="newEmp.skills.splice($index, 1)">X</a>]</span>
               <br>
               <button class="btn"
                       data-ng-click="newEmp.skills = newEmp.skills || [];addUniqueItem(newEmp.skills, addSkill)">
